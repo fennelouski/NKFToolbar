@@ -78,6 +78,11 @@ static CGSize const minimumToolbarSize = {44.0f, 44.0f};
                         [self.toolbarContainerDictionary setObject:barButtonItemContainer
                                                             forKey:barButtonItem];
                     }
+                    
+                    barButtonItemContainer.tintColor = self.tintColor;
+                    barButtonItemContainer.barTintColor = self.barTintColor;
+                    barButtonItemContainer.backgroundColor = [UIColor clearColor];
+                    barButtonItemContainer.clipsToBounds = YES;
                 }
                 
                 [barButtonItemContainer setItems:@[self.flexibleSpace, barButtonItem, self.flexibleSpace]
@@ -94,17 +99,19 @@ static CGSize const minimumToolbarSize = {44.0f, 44.0f};
             UIToolbar *container = [self.verticalItemContainers objectAtIndex:i];
             
             container.center = CGPointMake(offset.width,
-                                           container.frame.size.height * 0.5f + offset.height + (float)i / (float)(self.verticalItemContainers.count - ((self.verticalItemContainers.count > 1) ? 0 : 0)) * self.frame.size.height);
+                                           container.frame.size.height * 0.75f + offset.height + (float)i / (float)(self.verticalItemContainers.count - ((self.verticalItemContainers.count > 1) ? 0 : 0)) * self.frame.size.height);
             
             [self addSubview:container];
             
-            UIBarButtonItem *actualItem = [container.items objectAtIndex:1];
-            if (actualItem.style == UIBarButtonItemStylePlain) {
-                [actualItem setTitleTextAttributes:@{NSFontAttributeName : [UIFont boldSystemFontOfSize:[UIFont systemFontSize]]}
-                                          forState:UIControlStateNormal];
-            } else {
-                [actualItem setTitleTextAttributes:@{NSFontAttributeName : [UIFont systemFontOfSize:[UIFont systemFontSize]]}
-                                          forState:UIControlStateNormal];
+            if (container.items.count > 1) {
+                UIBarButtonItem *actualItem = [container.items objectAtIndex:1];
+                if (actualItem.style == UIBarButtonItemStylePlain) {
+                    [actualItem setTitleTextAttributes:@{NSFontAttributeName : [UIFont boldSystemFontOfSize:[UIFont systemFontSize]]}
+                                              forState:UIControlStateNormal];
+                } else {
+                    [actualItem setTitleTextAttributes:@{NSFontAttributeName : [UIFont systemFontOfSize:[UIFont systemFontSize]]}
+                                              forState:UIControlStateNormal];
+                }
             }
             
             [container layoutSubviews];
