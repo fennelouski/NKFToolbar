@@ -12,8 +12,6 @@ static CGSize const minimumToolbarSize = {44.0f, 44.0f};
 
 @interface NKFToolbar ()
 
-@property (nonatomic, strong) UIBarButtonItem *flexibleSpace;
-
 @property (nonatomic, strong) NSMapTable *toolbarContainerDictionary;
 
 @property (nonatomic)  CGSize sizeWhileHorizontal;
@@ -21,6 +19,8 @@ static CGSize const minimumToolbarSize = {44.0f, 44.0f};
 @property (nonatomic, strong) NSMutableArray *verticalItemContainers;
 
 @property (nonatomic, strong) NSArray *backupCopyOfItems;
+
+@property (nonatomic, strong) UIBarButtonItem *flexibleSpace;
 
 @end
 
@@ -41,6 +41,8 @@ static CGSize const minimumToolbarSize = {44.0f, 44.0f};
 
 - (void)layoutSubviews {
     if (self.orientation == NKFToolbarOrientationHorizontal) {
+        self.sizeWhileHorizontal = self.bounds.size;
+        
         NSMutableArray *updatedItems = [NSMutableArray new];
         
         for (UIToolbar *toolbarContainer in self.verticalItemContainers) {
