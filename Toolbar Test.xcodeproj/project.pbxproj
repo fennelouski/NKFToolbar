@@ -15,6 +15,7 @@
 		2705A9C21C36E6DD009B1FFF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2705A9C01C36E6DD009B1FFF /* LaunchScreen.storyboard */; };
 		2705A9CD1C36E6DD009B1FFF /* Toolbar_TestTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2705A9CC1C36E6DD009B1FFF /* Toolbar_TestTests.m */; };
 		2705A9D81C36E6DD009B1FFF /* Toolbar_TestUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2705A9D71C36E6DD009B1FFF /* Toolbar_TestUITests.m */; };
+		2705A9E71C36E747009B1FFF /* NKFToolbar.m in Sources */ = {isa = PBXBuildFile; fileRef = 2705A9E61C36E747009B1FFF /* NKFToolbar.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +52,8 @@
 		2705A9D31C36E6DD009B1FFF /* Toolbar TestUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Toolbar TestUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2705A9D71C36E6DD009B1FFF /* Toolbar_TestUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Toolbar_TestUITests.m; sourceTree = "<group>"; };
 		2705A9D91C36E6DD009B1FFF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2705A9E51C36E747009B1FFF /* NKFToolbar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NKFToolbar.h; sourceTree = "<group>"; };
+		2705A9E61C36E747009B1FFF /* NKFToolbar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NKFToolbar.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,6 +108,8 @@
 				2705A9B61C36E6DD009B1FFF /* AppDelegate.m */,
 				2705A9B81C36E6DD009B1FFF /* ViewController.h */,
 				2705A9B91C36E6DD009B1FFF /* ViewController.m */,
+				2705A9E51C36E747009B1FFF /* NKFToolbar.h */,
+				2705A9E61C36E747009B1FFF /* NKFToolbar.m */,
 				2705A9BB1C36E6DD009B1FFF /* Main.storyboard */,
 				2705A9BE1C36E6DD009B1FFF /* Assets.xcassets */,
 				2705A9C01C36E6DD009B1FFF /* LaunchScreen.storyboard */,
@@ -271,6 +276,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2705A9BA1C36E6DD009B1FFF /* ViewController.m in Sources */,
+				2705A9E71C36E747009B1FFF /* NKFToolbar.m in Sources */,
 				2705A9B71C36E6DD009B1FFF /* AppDelegate.m in Sources */,
 				2705A9B41C36E6DD009B1FFF /* main.m in Sources */,
 			);
