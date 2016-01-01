@@ -98,6 +98,15 @@ static CGSize const minimumToolbarSize = {44.0f, 44.0f};
             
             [self addSubview:container];
             
+            UIBarButtonItem *actualItem = [container.items objectAtIndex:1];
+            if (actualItem.style == UIBarButtonItemStylePlain) {
+                [actualItem setTitleTextAttributes:@{NSFontAttributeName : [UIFont boldSystemFontOfSize:[UIFont systemFontSize]]}
+                                          forState:UIControlStateNormal];
+            } else {
+                [actualItem setTitleTextAttributes:@{NSFontAttributeName : [UIFont systemFontOfSize:[UIFont systemFontSize]]}
+                                          forState:UIControlStateNormal];
+            }
+            
             [container layoutSubviews];
         }
     }

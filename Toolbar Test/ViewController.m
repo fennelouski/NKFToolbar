@@ -12,7 +12,7 @@
 @interface ViewController ()
 
 @property (nonatomic, strong) NKFToolbar *testToolbar;
-@property (nonatomic, strong) UIBarButtonItem *shareButton, *flexibleSpace, *cancelButton, *cameraButton;
+@property (nonatomic, strong) UIBarButtonItem *shareButton, *flexibleSpace, *resetButton, *cameraButton;
 
 @end
 
@@ -52,7 +52,7 @@
         
         self.testToolbar.frame = CGRectMake(0.0f,
                                             0.0f,
-                                            100.0f,
+                                            60.0f,
                                             self.view.frame.size.height);
     }
     
@@ -70,7 +70,7 @@
                                                                     self.view.frame.size.width,
                                                                     44.0f)];
         
-        _testToolbar.items = @[self.shareButton, self.flexibleSpace, self.cancelButton, self.flexibleSpace, self.cameraButton];
+        _testToolbar.items = @[self.shareButton, self.flexibleSpace, self.resetButton, self.flexibleSpace, self.cameraButton];
         _testToolbar.usesSpaces = YES;
     }
     
@@ -93,14 +93,15 @@
                                                          action:nil];
 }
 
-- (UIBarButtonItem *)cancelButton {
-    if (!_cancelButton) {
-        _cancelButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel
-                                                                      target:self
-                                                                      action:@selector(barButtonTouched:)];
+- (UIBarButtonItem *)resetButton {
+    if (!_resetButton) {
+        _resetButton = [[UIBarButtonItem alloc] initWithTitle:@"Reset"
+                                                        style:UIBarButtonItemStylePlain
+                                                       target:self
+                                                       action:@selector(barButtonTouched:)];
     }
     
-    return _cancelButton;
+    return _resetButton;
 }
 
 - (UIBarButtonItem *)cameraButton {
