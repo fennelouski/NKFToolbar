@@ -12,7 +12,7 @@
 @interface ViewController ()
 
 @property (nonatomic, strong) NKFToolbar *testToolbar;
-@property (nonatomic, strong) UIBarButtonItem *shareButton, *flexibleSpace, *resetButton, *cameraButton;
+@property (nonatomic, strong) UIBarButtonItem *shareButton, *flexibleSpace, *resetButton, *cameraButton, *extraButton;
 
 @end
 
@@ -66,7 +66,7 @@
 - (NKFToolbar *)testToolbar {
     if (!_testToolbar) {
         _testToolbar = [[NKFToolbar alloc] initWithFrame:CGRectMake(0.0f,
-                                                                    100.0f,
+                                                                    0.0f,
                                                                     self.view.frame.size.width,
                                                                     44.0f)];
         
@@ -114,8 +114,28 @@
     return _cameraButton;
 }
 
+- (UIBarButtonItem *)extraButton {
+    if (!_extraButton) {
+        _extraButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRedo
+                                                                     target:self
+                                                                     action:@selector(barButtonTouched:)];
+    }
+    
+    return _extraButton;
+}
+
 - (void)barButtonTouched:(UIBarButtonItem *)sender {
     NSLog(@"Sender: %@", sender);
+    
+    if ([sender isEqual:self.cameraButton]) {
+        [self.testToolbar setItems:@[self.shareButton, self.flexibleSpace, self.resetButton, self.flexibleSpace, self.cameraButton]
+                          animated:YES];
+        
+    } else if ([sender isEqual:self.shareButton] || [sender isEqual:self.resetButton]) {
+        [self.testToolbar setItems:@[self.extraButton, self.flexibleSpace, self.cameraButton, self.flexibleSpace, self.resetButton]
+                          animated:YES];
+        [self.testToolbar layoutSubviews];
+    }
 }
 
 

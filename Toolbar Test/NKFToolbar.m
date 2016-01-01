@@ -140,6 +140,13 @@ static CGSize const minimumToolbarSize = {44.0f, 44.0f};
     }
     
     self.backupCopyOfItems = tempItems;
+    
+    [self.verticalItemContainers removeAllObjects];
+    
+    [UIView animateWithDuration:animated ? 0.35f : 0.0f
+                     animations:^{
+                         [self layoutSubviews];
+                     }];
 }
 
 
