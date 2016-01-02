@@ -30,4 +30,14 @@ typedef enum : NSUInteger {
  */
 @property (nonatomic) BOOL firstItemIsSpace;
 
+/**
+ *  Separates the items vertically so they're freely floating without a toolbar frame.
+ */
+@property (nonatomic) BOOL useFloatingVerticalItems;
+
+/**
+ *  If the toolbar is floating then round the corners to this radius.
+ */
+@property (nonatomic) CGFloat floatingCornerRadius;
+
 @end

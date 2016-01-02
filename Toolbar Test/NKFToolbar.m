@@ -8,6 +8,9 @@
 
 #import "NKFToolbar.h"
 
+#define degreesToRadians(x) (M_PI * (x) / 180.0)
+
+
 static CGSize const minimumToolbarSize = {44.0f, 44.0f};
 
 @interface NKFToolbar ()
@@ -71,10 +74,11 @@ static CGSize const minimumToolbarSize = {44.0f, 44.0f};
                 UIToolbar *barButtonItemContainer = [self.toolbarContainerDictionary
                                                      objectForKey:barButtonItem];
                 if (!barButtonItemContainer) {
-                    barButtonItemContainer = [[UIToolbar alloc] initWithFrame:CGRectMake(0.0f,
-                                                                                         0.0f,
-                                                                                         self.frame.size.width,
-                                                                                         (self.sizeWhileHorizontal.height > minimumToolbarSize.height) ? self.sizeWhileHorizontal.height : minimumToolbarSize.height)];
+                    CGRect frame = CGRectMake(0.0f,
+                                              0.0f,
+                                              self.frame.size.width,
+                                              (self.sizeWhileHorizontal.height > minimumToolbarSize.height) ? self.sizeWhileHorizontal.height : minimumToolbarSize.height);
+                    barButtonItemContainer = [[UIToolbar alloc] initWithFrame:frame];
                     
                     if (barButtonItem && barButtonItemContainer) {
                         [self.toolbarContainerDictionary setObject:barButtonItemContainer
@@ -97,11 +101,56 @@ static CGSize const minimumToolbarSize = {44.0f, 44.0f};
         CGSize offset = CGSizeMake(((self.frame.size.width > minimumToolbarSize.width) ? self.frame.size.width: minimumToolbarSize.width) * 0.5f,
                                    ((self.sizeWhileHorizontal.height > minimumToolbarSize.height) ? self.sizeWhileHorizontal.height : minimumToolbarSize.height) * 0.5f);
         
+        if (self.useFloatingVerticalItems) {
+            offset.width -= self.floatingCornerRadius;
+            
+            [self setBackgroundImage:[UIImage new]
+                  forToolbarPosition:UIBarPositionAny
+                          barMetrics:UIBarMetricsDefault];
+            [self setShadowImage:[UIImage new]
+              forToolbarPosition:UIBarPositionAny];
+        } else {
+            [self setBackgroundImage:nil
+                  forToolbarPosition:UIBarPositionAny
+                          barMetrics:UIBarMetricsDefault];
+            [self setShadowImage:nil
+              forToolbarPosition:UIBarPositionAny];
+        }
+        
         for (int i = 0; i < self.verticalItemContainers.count; i++) {
             UIToolbar *container = [self.verticalItemContainers objectAtIndex:i];
             
-            container.center = CGPointMake(offset.width,
-                                           container.frame.size.height * 0.75f + offset.height + (float)i / (float)(self.verticalItemContainers.count - ((self.verticalItemContainers.count > 1) ? 0 : 0)) * self.frame.size.height);
+            CGPoint center = CGPointMake(offset.width,
+                                         container.frame.size.height * 0.5f + (float)i / (float)(self.verticalItemContainers.count - ((self.verticalItemContainers.count > 1) ? 1 : 0)) * (self.frame.size.height - offset.height * 2.0f));
+            
+            
+            if (self.useFloatingVerticalItems) {
+                if (i == 0) {
+                    center.y -= self.floatingCornerRadius;
+                } else if (i + 1 == self.verticalItemContainers.count) {
+                    center.y += self.floatingCornerRadius;
+                }
+                
+                container.clipsToBounds = YES;
+                container.layer.cornerRadius = self.floatingCornerRadius;
+                
+                [container setBackgroundImage:nil
+                           forToolbarPosition:UIBarPositionAny
+                                   barMetrics:UIBarMetricsDefault];
+                [container setShadowImage:nil
+                       forToolbarPosition:UIBarPositionAny];
+            } else {
+                container.clipsToBounds = NO;
+                container.layer.cornerRadius = 0.0f;
+                
+                [container setBackgroundImage:[UIImage new]
+                           forToolbarPosition:UIBarPositionAny
+                                   barMetrics:UIBarMetricsDefault];
+                [container setShadowImage:[UIImage new]
+                       forToolbarPosition:UIBarPositionAny];
+            }
+            
+            container.center = center;
             
             [self addSubview:container];
             
@@ -155,6 +204,8 @@ static CGSize const minimumToolbarSize = {44.0f, 44.0f};
                                                          target:nil
                                                          action:nil];
 }
+
+
 
 
 

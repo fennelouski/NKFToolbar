@@ -125,8 +125,6 @@
 }
 
 - (void)barButtonTouched:(UIBarButtonItem *)sender {
-    NSLog(@"Sender: %@", sender);
-    
     if ([sender isEqual:self.cameraButton]) {
         [self.testToolbar setItems:@[self.shareButton, self.flexibleSpace, self.resetButton, self.flexibleSpace, self.cameraButton]
                           animated:YES];
