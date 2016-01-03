@@ -17,16 +17,19 @@ typedef enum : NSUInteger {
 
 /**
  *  The orientation of the toolbar. Horizontal results in the toolbar being used as a regular UIToolbar.
+ *  Default is Horizontal.
  */
 @property (nonatomic) NKFToolbarOrientation orientation;
 
 /**
- *  If each item is separated by a space. Setting as YES will skip every other item.
+ *  Set YES if each item is separated by a space. Setting as YES will skip every other item.
+ *  Default is NO.
  */
 @property (nonatomic) BOOL usesSpaces;
 
 /**
  *  Only used if usesSpaces is YES. This switches the items skipped from being even to being odd.
+ *  Default is NO.
  */
 @property (nonatomic) BOOL firstItemIsSpace;
 
