@@ -37,9 +37,28 @@ static CGSize const minimumToolbarSize = {44.0f, 44.0f};
                                                                     valueOptions:NSPointerFunctionsStrongMemory
                                                                         capacity:16/*Arbitrary Value*/];
         self.verticalItemContainers = [NSMutableArray new];
+        
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.35f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [self updateLayout];
+        });
+        
+        self.clipsToBounds = YES;
     }
     
     return self;
+}
+
+- (void)updateLayout {
+    if (self.superview) {
+        NKFToolbarOrientation tempOrientation = self.orientation;
+        
+        self.orientation = NKFToolbarOrientationHorizontal;
+        [self layoutSubviews];
+        self.orientation = NKFToolbarOrientationVertical;
+        [self layoutSubviews];
+        self.orientation = tempOrientation;
+        [self layoutSubviews];
+    }
 }
 
 - (void)layoutSubviews {
